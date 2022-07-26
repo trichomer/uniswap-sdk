@@ -8,7 +8,6 @@ const chainId = ChainId.HARMONY;
 const jewelAddress = '0x72Cb10C6bfA5624dD07Ef608027E366bd690048F';
 const woneAddress = '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a';
 const dfkRouter = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D';
-const dfkFactory = new ethers.Contract('0x9014B937069918bd319f80e8B3BB4A2cf6FAA5F7', UniswapV2Factory.abi);
 
 const init = async () => {
     const jewel = await Fetcher.fetchTokenData(chainId, jewelAddress, customHttpProvider);
