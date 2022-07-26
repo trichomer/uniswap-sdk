@@ -14,7 +14,7 @@ const init = async () => {
     const jewel = await Fetcher.fetchTokenData(chainId, jewelAddress, customHttpProvider);
     const wone = await Fetcher.fetchTokenData(chainId, woneAddress, customHttpProvider);
     const shvas = await Fetcher.fetchTokenData(chainId, shvasAddress, customHttpProvider);
-    // console.log(jewel, wone, shvas);
+    console.log(jewel, wone, shvas);
     const uniswap = new ethers.Contract(dfkRouter, #####ABI#####, customHttpProvider);
     console.log(uniswap);
     // const pair = await Fetcher.fetchPairData(wone, jewel, customHttpProvider);
