@@ -55,14 +55,14 @@ async function swapTokens(token1, token2, amount, slippage = "50") {
         
 
         //Resolves to the TransactionReceipt once the transaction has been included in the chain for x confirms blocks.
-        let reciept = (await sendTxn).wait()
+        let receipt = (await sendTxn).wait()
 
         //Logs the information about the transaction it has been mined.
-        if (reciept) {
+        if (receipt) {
             console.log(" - Transaction is mined - " + '\n' 
             + "Transaction Hash:", (await sendTxn).hash
             + '\n' + "Block Number: " 
-            + (await reciept).blockNumber + '\n' 
+            + (await receipt).blockNumber + '\n' 
             + "Navigate to https://rinkeby.etherscan.io/txn/" 
             + (await sendTxn).hash, "to see your transaction")
         } else {
