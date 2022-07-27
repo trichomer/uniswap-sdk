@@ -1,4 +1,4 @@
-const { ChainId, Fetcher, Route, Trade, TokenAmount, TradeType, FACTORY_ADDRESS } = require ('@uniswap/sdk');
+const { ChainId, Fetcher, Route, Trade, TokenAmount, TradeType } = require ('@uniswap/sdk');
 const ethers = require('ethers');  
 
 const url = 'https://api.s0.t.hmny.io/';
@@ -16,11 +16,17 @@ const init = async () => {
     const wone = await Fetcher.fetchTokenData(chainId, woneAddress, customHttpProvider);
     const shvas = await Fetcher.fetchTokenData(chainId, shvasAddress, customHttpProvider);
     console.log(jewel, wone, shvas);
-    const jewelwone = new ethers.Contract(
-        dfkRouter,
-        ['function swapExactTokensForTokens(uint256,uint256,address[],address,uint256)'],
-        customHttpProvider);
-    console.log(jewelwone);
+    const pair = await Fetcher.fetchPairData(wone, jewel, customHttpProvider);
+    // const jewelwone = new ethers.Contract(
+    //     dfkRouter,
+    //     ['function swapTokensForExactTokens(uint256,uint256,address[],address,uint256)'],
+    //     customHttpProvider);
+    // console.log(jewelwone);
+    
+    // const tx = await jewelwone.swapTokensforExactTokens(
+    //     ethers.utils.parseUnits('1', 18)
+    // );
+
 
     // const uniswap = new ethers.Contract(dfkRouter, #####ABI#####, customHttpProvider);
     // console.log(uniswap);
