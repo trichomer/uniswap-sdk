@@ -1,7 +1,7 @@
-const { ChainId, Fetcher, Route, Trade, TokenAmount, TradeType } = require ('@uniswap/sdk');
+const { ChainId, Fetcher, Route, Trade, TokenAmount, TradeType, FACTORY_ADDRESS } = require ('@uniswap/sdk');
 const ethers = require('ethers');  
 
-const url = 'https://api.harmony.one';
+const url = 'https://api.s0.t.hmny.io/';
 const customHttpProvider = new ethers.providers.JsonRpcProvider(url);
 
 const chainId = ChainId.HARMONY;
@@ -10,13 +10,21 @@ const woneAddress = '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a';
 const shvasAddress = '0x66F5BfD910cd83d3766c4B39d13730C911b2D286';
 const dfkRouter = '0x24ad62502d1C652Cc7684081169D04896aC20f30';
 
+
 const init = async () => {
     const jewel = await Fetcher.fetchTokenData(chainId, jewelAddress, customHttpProvider);
     const wone = await Fetcher.fetchTokenData(chainId, woneAddress, customHttpProvider);
     const shvas = await Fetcher.fetchTokenData(chainId, shvasAddress, customHttpProvider);
     console.log(jewel, wone, shvas);
-    const uniswap = new ethers.Contract(dfkRouter, #####ABI#####, customHttpProvider);
-    console.log(uniswap);
+    const jewelwone = new ethers.Contract(
+        dfkRouter,
+        [],
+        customHttpProvider);
+    console.log(jewelwone);
+
+    // const uniswap = new ethers.Contract(dfkRouter, #####ABI#####, customHttpProvider);
+    // console.log(uniswap);
+
     // const pair = await Fetcher.fetchPairData(wone, jewel, customHttpProvider);
     // const route = new Route([pair], wone);
     // const trade = new Trade(route, new TokenAmount(wone, '100000000000000000000'), TradeType.EXACT_INPUT);
