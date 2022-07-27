@@ -9,7 +9,7 @@ const jewelAddress = '0x72Cb10C6bfA5624dD07Ef608027E366bd690048F';
 const woneAddress = '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a';
 const shvasAddress = '0x66F5BfD910cd83d3766c4B39d13730C911b2D286';
 const dfkRouter = '0x24ad62502d1C652Cc7684081169D04896aC20f30';
-
+const ABI = require('./UniswapV2Router02.json');
 
 const init = async () => {
     const jewel = await Fetcher.fetchTokenData(chainId, jewelAddress, customHttpProvider);
@@ -18,7 +18,7 @@ const init = async () => {
     console.log(jewel, wone, shvas);
     const jewelwone = new ethers.Contract(
         dfkRouter,
-        [],
+        ABI,
         customHttpProvider);
     console.log(jewelwone);
 
