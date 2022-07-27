@@ -18,7 +18,7 @@ const init = async () => {
     console.log(jewel, wone, shvas);
     const jewelwone = new ethers.Contract(
         dfkRouter,
-        ABI,
+        ['function swapExactTokensForTokens(uint256,uint256,address[],address,uint256)'],
         customHttpProvider);
     console.log(jewelwone);
 
