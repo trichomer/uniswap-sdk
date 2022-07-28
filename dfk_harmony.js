@@ -7,32 +7,43 @@ const customHttpProvider = new ethers.providers.JsonRpcProvider(url);
 const chainId = ChainId.HARMONY;
 const JEWEL = new Token(ChainId.HARMONY, '0x72Cb10C6bfA5624dD07Ef608027E366bd690048F', 18, 'JEWEL', 'Jewel Token');
 const WONE = new Token(ChainId.HARMONY, '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a', 18, 'WONE', 'Wrapped ONE Token');
-const shvasAddress = '0x66F5BfD910cd83d3766c4B39d13730C911b2D286';
+const SHVAS = new Token(ChainId.HARMONY, '0x66F5BfD910cd83d3766c4B39d13730C911b2D286', 0, 'DFKSHVAS', "Shvas Rune");
 const jewelWonePairAddress = '0xEb579ddcD49A7beb3f205c9fF6006Bb6390F138f';
 const dfkRouterAddress = '0x24ad62502d1C652Cc7684081169D04896aC20f30';
 const ABI = require('./UniswapV2Router02.json');
 
 
-const pair = new Pair(new TokenAmount(JEWEL, '2000000000000000000'), new TokenAmount(WONE, '1000000000000000000'));
-console.log(pair);
+const pair = new Pair(new TokenAmount(SHVAS, '1000000000000000000'), new TokenAmount(JEWEL, '1000000000000000000'));
+// console.log(pair);
+const route = new Route([pair], JEWEL);
+// console.log(route);
+const trade = new Trade(route, new TokenAmount(JEWEL, '1000000000000000000'), TradeType.EXACT_INPUT);
+console.log(trade);
+console.log("-".repeat(60));
+console.log("Mid Price JEWEL --> SHVAS:", route.midPrice.toSignificant(6));
+console.log("Mid Price SHVAS --> JEWEL:", route.midPrice.invert().toSignificant(6));
+console.log("-".repeat(60));
+console.log("Execution Price JEWEL --> SHVAS:", trade.executionPrice.toSignificant(6));
+console.log("Mid Price after trade SHVAS --> JEWEL:", trade.nextMidPrice.toSignificant(6));
+console.log("-".repeat(60));
 
 
-const jewelWonePair = async () => {
-    const pairAddress = Pair.getAddress(JEWEL, WONE)
+// const jewelWonePair = async () => {
+//     const pairAddress = Pair.getAddress(JEWEL, WONE)
   
-    const reserves = [
-      pairAddress
-    ]
-    const [reserve0, reserve1] = reserves
+//     const reserves = [
+//       pairAddress
+//     ]
+//     const [reserve0, reserve1] = reserves
   
-    const tokens = [JEWEL, WONE]
-    const [token0, token1] = tokens[0].sortsBefore(tokens[1]) ? tokens : [tokens[1], tokens[0]]
+//     const tokens = [JEWEL, WONE]
+//     const [token0, token1] = tokens[0].sortsBefore(tokens[1]) ? tokens : [tokens[1], tokens[0]]
   
-    const pair = new Pair(new TokenAmount(token0, reserve0), new TokenAmount(token1, reserve1))
-    return pair
-  }
+//     const pair = new Pair(new TokenAmount(token0, reserve0), new TokenAmount(token1, reserve1))
+//     return pair
+//   }
 
-jewelWonePair();
+// jewelWonePair();
 
 
 // const init = async () => {
@@ -43,7 +54,7 @@ jewelWonePair();
 
 
 
-//     const pair = await Fetcher.fetchPairData(wone, jewel, customHttpProvider);
+    // const pair = await Fetcher.fetchPairData(wone, jewel, customHttpProvider);
 
 
 
