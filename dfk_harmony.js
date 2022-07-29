@@ -8,24 +8,33 @@ const chainId = ChainId.HARMONY;
 const JEWEL = new Token(ChainId.HARMONY, '0x72Cb10C6bfA5624dD07Ef608027E366bd690048F', 18, 'JEWEL', 'Jewel Token');
 const WONE = new Token(ChainId.HARMONY, '0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a', 18, 'WONE', 'Wrapped ONE Token');
 const SHVAS = new Token(ChainId.HARMONY, '0x66F5BfD910cd83d3766c4B39d13730C911b2D286', 0, 'DFKSHVAS', "Shvas Rune");
-const jewelWonePairAddress = '0xEb579ddcD49A7beb3f205c9fF6006Bb6390F138f';
+const ANTBLND = new Token(ChainId.HARMONY, '0x1771dEc8D9A29F30d82443dE0a69e7b6824e2F53', 0, 'DFKANTBLND', "Anti-Blinding Potion");
+// const jewelWonePairAddress = '0xEb579ddcD49A7beb3f205c9fF6006Bb6390F138f';
 const dfkRouterAddress = '0x24ad62502d1C652Cc7684081169D04896aC20f30';
 const ABI = require('./UniswapV2Router02.json');
 
 
-const pair = new Pair(new TokenAmount(SHVAS, '1000000000000000000'), new TokenAmount(JEWEL, '1000000000000000000'));
+const pair = new Pair(new TokenAmount(ANTBLND, '1'), new TokenAmount(JEWEL, '1000000000000000000'));
 // console.log(pair);
-const route = new Route([pair], JEWEL);
+const route = new Route([pair], ANTBLND);
 // console.log(route);
-const trade = new Trade(route, new TokenAmount(JEWEL, '1000000000000000000'), TradeType.EXACT_INPUT);
+const trade = new Trade(route, new TokenAmount(ANTBLND, '1'), TradeType.EXACT_INPUT);
 console.log(trade);
 console.log("-".repeat(60));
-console.log("Mid Price JEWEL --> SHVAS:", route.midPrice.toSignificant(6));
-console.log("Mid Price SHVAS --> JEWEL:", route.midPrice.invert().toSignificant(6));
+console.log("Mid Price JEWEL --> ANTBLND:", route.midPrice.toSignificant(6));
+console.log("Mid Price ANTBLND --> JEWEL:", route.midPrice.invert().toSignificant(6));
 console.log("-".repeat(60));
-console.log("Execution Price JEWEL --> SHVAS:", trade.executionPrice.toSignificant(6));
-console.log("Mid Price after trade SHVAS --> JEWEL:", trade.nextMidPrice.toSignificant(6));
+console.log("Execution Price JEWEL --> ANTBLND:", trade.executionPrice.toSignificant(6));
+console.log("Mid Price after trade ANTBLND --> JEWEL:", trade.nextMidPrice.toSignificant(6));
 console.log("-".repeat(60));
+
+
+
+
+
+
+
+
 
 
 // const jewelWonePair = async () => {
